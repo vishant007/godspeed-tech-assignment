@@ -100,7 +100,7 @@ const ParameterRow = memo(function ParameterRow({
           <SelectTrigger className="w-[140px]">
             <SelectValue placeholder="Choose ratio" />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent position="popper" sideOffset={5} className="z-[100]">
             {ASPECT_RATIO_PRESETS.map((p) => (
               <SelectItem key={p.label} value={p.label}>
                 {p.label}

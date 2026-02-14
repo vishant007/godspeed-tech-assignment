@@ -30,7 +30,7 @@ export function UnitSelector({ value, onChange }: UnitSelectorProps) {
         <SelectTrigger className="w-full">
           <SelectValue placeholder="Select unit" />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent position="popper" sideOffset={5} className="z-[100]">
           {(Object.keys(UNIT_LABELS) as Unit[]).map((u) => (
             <SelectItem key={u} value={u}>
               {UNIT_LABELS[u]}

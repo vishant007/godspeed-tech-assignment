@@ -22,6 +22,37 @@ export function EmbeddedAgent({ isOpen, onToggle }: EmbeddedAgentProps) {
       });
   }, []);
 
+  // Listen for clicks anywhere in the sidebar to detect close button clicks
+  useEffect(() => {
+    if (!isOpen || !ready) return;
+
+    const handleClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+
+      // Check if the click is on a close button (X icon in top-right corner)
+      // The webmcp-agent's close button is in the top-right
+      const agentElement = document.querySelector('webmcp-agent');
+      if (agentElement) {
+        const rect = agentElement.getBoundingClientRect();
+        const clickX = e.clientX;
+        const clickY = e.clientY;
+
+        // If click is in top-right corner area (close button region)
+        if (clickX > rect.right - 100 && clickY < rect.top + 100) {
+          onToggle(false);
+        }
+      }
+    };
+
+    const sidebar = document.querySelector('.webmcp-sidebar');
+    if (sidebar) {
+      sidebar.addEventListener('click', handleClick);
+      return () => {
+        sidebar.removeEventListener('click', handleClick);
+      };
+    }
+  }, [isOpen, ready, onToggle]);
+
   const devMode = useMemo(
     () =>
       typeof process !== "undefined" && process.env.NEXT_PUBLIC_ANTHROPIC_API_KEY
@@ -41,8 +72,9 @@ export function EmbeddedAgent({ isOpen, onToggle }: EmbeddedAgentProps) {
         "dev-mode": devMode,
         "enable-debug-tools": "false",
         style: { height: "100%", width: "100%" },
+        onClose: handleClose,
       }),
-    [devMode]
+    [devMode, handleClose]
   );
 
   const mobileWebMCPAgent = useMemo(
@@ -80,22 +112,19 @@ export function EmbeddedAgent({ isOpen, onToggle }: EmbeddedAgentProps) {
           </Button>
         )}
 
+        {/* Backdrop overlay - click to close */}
+        {isOpen && (
+          <div
+            className="fixed inset-0 bg-black/20 z-40"
+            onClick={handleClose}
+            aria-label="Close sidebar backdrop"
+            title="Click to close sidebar"
+          />
+        )}
+
         {/* Sidebar */}
         {isOpen && (
-          <div className="fixed inset-y-0 right-0 w-[30vw] bg-background border-l border-border shadow-2xl z-50 flex flex-col">
-            {/* Sidebar header */}
-            <div className="flex items-center justify-between p-4 border-b border-border">
-              <h2 className="text-lg font-semibold">AI Assistant</h2>
-              <Button
-                onClick={handleClose}
-                variant="ghost"
-                size="icon"
-                aria-label="Close AI Assistant"
-              >
-                <X className="h-5 w-5" />
-              </Button>
-            </div>
-
+          <div className="webmcp-sidebar fixed inset-y-0 right-0 w-[30vw] bg-background border-l border-border shadow-2xl z-50 flex flex-col">
             {/* Agent container */}
             <div className="flex-1 overflow-hidden">{webMCPAgent}</div>
           </div>

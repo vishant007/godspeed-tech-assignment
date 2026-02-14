@@ -21,6 +21,11 @@ A sophisticated video wall configuration calculator that determines optimal cabi
 - **Tool Integration**: AI can call calculator functions directly
 - **Voice-Ready**: Prepared for voice mode interactions
 
+##Enhancements that can be done: 
+- **UI-Driven Automation**: Agent can directly control and interact with the calculator UI
+- **No Third-Party Tools**: Eliminates security vulnerabilities from browser automation libraries like Playwright, Puppeteer, or Selenium
+- **Native Integration**: Built-in understanding of application state and components without external dependencies
+
 ## 🧮 Technical Highlights
 
 ### Advanced Calculation Logic
@@ -179,5 +184,25 @@ Prevents bias toward either dimensional or aspect ratio accuracy by scaling both
 ### Why WebMCP?
 Demonstrates forward-thinking AI integration using W3C standards, making the calculator accessible through natural language.
 https://webmcp.sh/
+
+#### UI Automation Without Security Risks
+
+The WebMCP agent provides a **secure alternative to traditional browser automation tools**:
+
+**Security Advantages:**
+- ❌ **No Playwright/Selenium Required**: Eliminates external automation dependencies that can introduce security vulnerabilities
+- ✅ **Direct UI Control**: Agent operates within the application's security context
+- ✅ **No Headless Browser Risks**: Avoids attack vectors associated with browser automation frameworks
+- ✅ **Reduced Attack Surface**: Fewer third-party dependencies mean fewer potential security holes
+- ✅ **Native DOM Access**: Safer than screen scraping or element detection methods
+
+**Capabilities:**
+- Automated testing without external tools
+- Form filling and data entry automation
+- Interactive user onboarding
+- UI state inspection and debugging
+- Guided tours and help systems
+
+This approach provides a more **secure, integrated, and maintainable** solution compared to traditional browser automation frameworks while still enabling powerful UI-driven interactions.
 
 
