@@ -12,9 +12,7 @@ export function WebMCPProvider({ children }: { children: React.ReactNode }) {
     <>
       <CryptoPolyfill />
 
-      {/* Flex container for desktop layout */}
       <div className="flex min-h-screen">
-        {/* Main content area - shrinks to 70% when sidebar is open on desktop */}
         <div
           className={`flex-1 transition-all duration-300 ease-in-out ${
             isSidebarOpen ? "md:max-w-[70vw]" : "w-full"

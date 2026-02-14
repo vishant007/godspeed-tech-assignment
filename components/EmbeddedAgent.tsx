@@ -22,22 +22,17 @@ export function EmbeddedAgent({ isOpen, onToggle }: EmbeddedAgentProps) {
       });
   }, []);
 
-  // Listen for clicks anywhere in the sidebar to detect close button clicks
   useEffect(() => {
     if (!isOpen || !ready) return;
 
-    const handleClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-
-      // Check if the click is on a close button (X icon in top-right corner)
-      // The webmcp-agent's close button is in the top-right
+    const handleClick = (e: Event) => {
+      const mouseEvent = e as MouseEvent;
       const agentElement = document.querySelector('webmcp-agent');
       if (agentElement) {
         const rect = agentElement.getBoundingClientRect();
-        const clickX = e.clientX;
-        const clickY = e.clientY;
+        const clickX = mouseEvent.clientX;
+        const clickY = mouseEvent.clientY;
 
-        // If click is in top-right corner area (close button region)
         if (clickX > rect.right - 100 && clickY < rect.top + 100) {
           onToggle(false);
         }
@@ -98,9 +93,7 @@ export function EmbeddedAgent({ isOpen, onToggle }: EmbeddedAgentProps) {
 
   return (
     <>
-      {/* Desktop: Sidebar layout */}
       <div className="hidden md:block">
-        {/* Chat icon button - bottom right */}
         {!isOpen && (
           <Button
             onClick={handleOpen}
@@ -112,7 +105,6 @@ export function EmbeddedAgent({ isOpen, onToggle }: EmbeddedAgentProps) {
           </Button>
         )}
 
-        {/* Backdrop overlay - click to close */}
         {isOpen && (
           <div
             className="fixed inset-0 bg-black/20 z-40"
@@ -122,16 +114,13 @@ export function EmbeddedAgent({ isOpen, onToggle }: EmbeddedAgentProps) {
           />
         )}
 
-        {/* Sidebar */}
         {isOpen && (
           <div className="webmcp-sidebar fixed inset-y-0 right-0 w-[30vw] bg-background border-l border-border shadow-2xl z-50 flex flex-col">
-            {/* Agent container */}
             <div className="flex-1 overflow-hidden">{webMCPAgent}</div>
           </div>
         )}
       </div>
 
-      {/* Mobile: Keep existing bottom UI */}
       <div className="md:hidden">{mobileWebMCPAgent}</div>
     </>
   );

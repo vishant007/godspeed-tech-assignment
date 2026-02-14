@@ -126,7 +126,6 @@
   }
 }
 
-/* Hide webmcp-agent's built-in close button in sidebar */
 .webmcp-sidebar webmcp-agent::part(close-button),
 .webmcp-sidebar webmcp-agent::part(header-close) {
   display: none !important;
