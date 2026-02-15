@@ -2,9 +2,8 @@ A sophisticated video wall configuration calculator that determines optimal cabi
 
 ## 🎬 Demo & Documentation
 
-- **📹 Live Demo**: [Add your deployed URL here]
-- **🎥 Loom Walkthrough**: [Add your Loom video link here]
-
+- **📹 Live Demo**: https://godspeed-tech-assignment.vercel.app/
+- **🎥 Loom Walkthrough**: https://www.loom.com/share/20286725a2f140f1b1039a9f30a0b5cc
 
 ## ✨ Features
 
